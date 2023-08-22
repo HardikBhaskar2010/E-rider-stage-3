@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   View,
   StyleSheet,
@@ -7,25 +7,25 @@ import {
   Text,
   ImageBackground,
   Image,
-  Alert
-} from "react-native";
-import * as Permissions from "expo-permissions";
-import { BarCodeScanner } from "expo-barcode-scanner";
+  Alert,
+} from 'react-native';
+import * as Permissions from 'expo-permissions';
+import { BarCodeScanner } from 'expo-barcode-scanner';
 //bgImage=require("backgroun2.png");
 //const bgImage = "../assets/background2.png";
 //const bgImage = require("background2.png");
-//const bgImage = require("../assets/background2.png");
-const appIcon = require("../assets/appIcon.png");
+const bgImage = require("../assets/background2.png");
+const appIcon = require('../assets/appIcon.png');
 
 export default class RideScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bikeId: "",
-      userId: "",
-      domState: "normal",
+      bikeId: '',
+      userId: '',
+      domState: 'normal',
       hasCameraPermissions: null,
-      scanned: false
+      scanned: false,
     };
   }
 
@@ -36,23 +36,23 @@ export default class RideScreen extends Component {
       /*status === "granted" is true when user has granted permission
           status === "granted" is false when user has not granted the permission
         */
-      hasCameraPermissions: status === "granted",
-      domState: "scanner",
-      scanned: false
+      hasCameraPermissions: status === 'granted',
+      domState: 'scanner',
+      scanned: false,
     });
   };
 
   handleBarCodeScanned = async ({ type, data }) => {
     this.setState({
       bikeId: data,
-      domState: "normal",
-      scanned: true
+      domState: 'normal',
+      scanned: true,
     });
   };
 
   render() {
     const { bikeId, userId, domState, scanned } = this.state;
-    if (domState !== "normal") {
+    if (domState !== 'normal') {
       return (
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
@@ -70,29 +70,27 @@ export default class RideScreen extends Component {
         <View style={styles.lowerContainer}>
           <View style={styles.textinputContainer}>
             <TextInput
-              style={[styles.textinput, { width: "82%" }]}
-              placeholder={"User Id"}
-              placeholderTextColor={"#FFFFFF"}
+              style={[styles.textinput, { width: '82%' }]}
+              placeholder={'User Id'}
+              placeholderTextColor={'#FFFFFF'}
               value={userId}
             />
           </View>
           <View style={[styles.textinputContainer, { marginTop: 25 }]}>
-
             <TextInput
               style={styles.textinput}
-              placeholder={"Bicycle Id"}
-              placeholderTextColor={"#FFFFFF"}
+              placeholder={'Bicycle Id'}
+              placeholderTextColor={'#FFFFFF'}
               value={bikeId}
             />
 
             <TouchableOpacity
               style={styles.scanbutton}
 
-             // onPress={this.getCameraPermissions()}
-             // onPress={() => this.getCameraPermissions()}
-             // onPress={() => this.getCameraPermissions}
-             // onPress=() => this.getCameraPermissions()
-
+              // onPress={this.getCameraPermissions()}
+               onPress={() => this.getCameraPermissions()}
+              // onPress={() => this.getCameraPermissions}
+              // onPress=() => this.getCameraPermissions()
             >
               <Text style={styles.scanbuttonText}>Scan</Text>
             </TouchableOpacity>
@@ -106,82 +104,82 @@ export default class RideScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#D0E6F0"
+    backgroundColor: '#D0E6F0',
   },
   bgImage: {
     flex: 1,
-    resizeMode: "cover",
-    justifyContent: "center"
+    resizeMode: 'cover',
+    justifyContent: 'center',
   },
   upperContainer: {
     flex: 0.5,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   appIcon: {
     width: 200,
     height: 200,
-    resizeMode: "contain",
-    marginTop: 80
+    resizeMode: 'contain',
+    marginTop: 80,
   },
   title: {
     fontSize: 40,
-    
+
     paddingTop: 20,
-    color: "#4C5D70"
+    color: '#4C5D70',
   },
   subtitle: {
     fontSize: 20,
-    color: "#4C5D70"
+    color: '#4C5D70',
   },
   lowerContainer: {
     flex: 0.5,
-    alignItems: "center"
+    alignItems: 'center',
   },
   textinputContainer: {
     borderWidth: 2,
     borderRadius: 10,
-    flexDirection: "row",
-    backgroundColor: "#4C5D70",
-    borderColor: "#4C5D70"
+    flexDirection: 'row',
+    backgroundColor: '#4C5D70',
+    borderColor: '#4C5D70',
   },
   textinput: {
-    width: "57%",
+    width: '57%',
     height: 50,
     padding: 10,
-    borderColor: "#4C5D70",
+    borderColor: '#4C5D70',
     borderRadius: 10,
     borderWidth: 3,
     fontSize: 18,
-    backgroundColor: "#F88379",
-    color: "#FFFFFF"
+    backgroundColor: '#F88379',
+    color: '#FFFFFF',
   },
   scanbutton: {
     width: 100,
     height: 50,
-    backgroundColor: "#FBE5C0",
+    backgroundColor: '#FBE5C0',
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   scanbuttonText: {
     fontSize: 24,
-    color: "#4C5D70",
-    fontFamily: "Rajdhani_600SemiBold"
+    color: '#4C5D70',
+    fontFamily: 'Rajdhani_600SemiBold',
   },
   button: {
-    width: "43%",
+    width: '43%',
     height: 55,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#FBE5C0",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FBE5C0',
     borderRadius: 20,
     borderWidth: 2,
-    borderColor: "#4C5D70"
+    borderColor: '#4C5D70',
   },
   buttonText: {
     fontSize: 24,
-    color: "#4C5D70",
-  }
+    color: '#4C5D70',
+  },
 });
